@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "317541288756",
+    "project_id": "third-technique-314608",
+    "storage_bucket": "third-technique-314608.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:317541288756:android:b6168b9482a8e50be5f361",
+        "android_client_info": {
+          "package_name": "com.example.android.politicalpreparedness"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "317541288756-ihq880ke8g6fcger75mt3ue5jqe9vmjg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.android.politicalpreparedness",
+            "certificate_hash": "5d9c44dfde634099cb3e0c766ed0e7c5faa3be07"
+          }
+        },
+        {
+          "client_id": "317541288756-oqvki6rt0kdt2eh67ul1dnalfer62cse.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAu9sSvf35zROF8MkhiMhVxdR5kwLh5kck"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "317541288756-oqvki6rt0kdt2eh67ul1dnalfer62cse.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

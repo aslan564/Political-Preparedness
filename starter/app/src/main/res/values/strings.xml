@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Political Preparedness</string>
+    <string name="api_election">Upcoming Elections</string>
+    <string name="saved_election">Saved Elections</string>
+    <string name="app_logo_image">app logo image</string>
+    <string name="upcoming_election">Upcoming Election</string>
+    <string name="find_my_representatives">Find My Representatives</string>
+    <string name="election_information">Election Information</string>
+    <string name="voting_locations">Voting Locations</string>
+    <string name="ballot_information">Ballot Information</string>
+    <string name="follow_election">Follow Election</string>
+    <string name="unfollow_election">Unfollow Election</string>
+    <string name="fragment_launch">Welcome </string>
 
     <!-- TODO: Add necessary string values -->
 

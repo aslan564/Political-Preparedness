@@ -6,13 +6,50 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.android.politicalpreparedness.MainActivity">
+        tools:context="com.example.android.politicalpreparedness.ui.activity.MainActivity">
 
-        <!-- TODO: Add image for home screen logo. -->
+        <ImageView
+            android:id="@+id/iv_logo_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ballot_logo"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.3"
+            android:contentDescription="@string/app_logo_image" />
 
-        <!-- TODO: Add Button to navigate to upcoming elections. -->
+        <Button
+            android:id="@+id/button_upcoming"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:background="@color/colorPrimary"
+            android:text="@string/upcoming_election"
+            android:textColor="@color/white"
+            app:layout_constraintVertical_bias="1"
+            android:layout_marginBottom="@dimen/large_margin"
+            app:layout_constraintBottom_toTopOf="@+id/button_find_my_representatives"
+            app:layout_constraintEnd_toEndOf="@+id/button_find_my_representatives"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/button_find_my_representatives"
+            app:layout_constraintTop_toBottomOf="@+id/iv_logo_image" />
 
-        <!-- TODO: Add Button to navigate to representatives. -->
+        <Button
+            android:id="@+id/button_find_my_representatives"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/large_margin"
+            android:background="@color/colorPrimary"
+            android:text="@string/find_my_representatives"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_logo_image"
+            app:layout_constraintVertical_bias="1" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
