@@ -1,13 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <variable
+            name="representative"
+            type="com.example.android.politicalpreparedness.ui.fragment.representative.model.Representative" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:padding="@dimen/default_padding">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/image_view_candidate"
+            android:layout_width="76dp"
+            android:layout_height="76dp"
+            android:layout_margin="@dimen/default_margin"
+            android:contentDescription="@string/voter_image"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@color/colorPrimary" />
+
+        <TextView
+            android:id="@+id/text_view_candidate_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:text="@{representative.office.name}"
+            android:textAppearance="@style/representative_style"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/image_view_candidate"
+            app:layout_constraintTop_toTopOf="@+id/image_view_candidate"
+            tools:text="President Of The United State" />
+
+        <TextView
+            android:id="@+id/text_view_candidate_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{representative.official.name}"
+            android:textAppearance="@style/body_style"
+            app:layout_constraintEnd_toStartOf="@+id/image_view_candidate_www"
+            app:layout_constraintStart_toStartOf="@+id/text_view_candidate_header"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_candidate_header"
+            tools:text="Donald J. Trump" />
+
+        <TextView
+            android:id="@+id/text_view_candidate_party"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:maxWidth="250dp"
+            android:text="@{representative.official.party}"
+            android:textAppearance="@style/body_style"
+            app:layout_constraintStart_toStartOf="@+id/text_view_candidate_name"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_candidate_name"
+            tools:text="Republican Party" />
+
+        <ImageView
+            android:id="@+id/image_view_candidate_www"
+            android:layout_width="@dimen/default_icon_size"
+            android:layout_height="@dimen/default_icon_size"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:contentDescription="@string/candidate_web_link"
+            android:src="@drawable/ic_www"
+            app:layout_constraintBottom_toBottomOf="@+id/image_view_candidate"
+            app:layout_constraintEnd_toStartOf="@+id/image_view_candidate_facebook"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_candidate_header" />
+
+        <ImageView
+            android:id="@+id/image_view_candidate_facebook"
+            android:layout_width="@dimen/default_icon_size"
+            android:layout_height="@dimen/default_icon_size"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:contentDescription="@string/candidate_facebook_link"
+            android:src="@drawable/ic_facebook"
+            app:layout_constraintBottom_toBottomOf="@+id/image_view_candidate"
+            app:layout_constraintEnd_toStartOf="@+id/image_view_candidate_twitter"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_candidate_header" />
+
+        <ImageView
+            android:id="@+id/image_view_candidate_twitter"
+            android:layout_width="@dimen/default_icon_size"
+            android:layout_height="@dimen/default_icon_size"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:contentDescription="@string/candidate_twitter_link"
+            android:src="@drawable/ic_twitter"
+            app:layout_constraintBottom_toBottomOf="@+id/image_view_candidate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_candidate_header" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

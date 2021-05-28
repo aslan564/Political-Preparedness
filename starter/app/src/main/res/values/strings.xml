@@ -7,11 +7,19 @@
     <string name="upcoming_election">Upcoming Election</string>
     <string name="find_my_representatives">Find My Representatives</string>
     <string name="election_information">Election Information</string>
-    <string name="voting_locations">Voting Locations</string>
+    <string name="voting_locations">  Voting Locations </string>
     <string name="ballot_information">Ballot Information</string>
     <string name="follow_election">Follow Election</string>
     <string name="unfollow_election">Unfollow Election</string>
     <string name="fragment_launch">Welcome </string>
+    <string name="use_my_location">Use My Location </string>
+    <string name="my_representative">My Representative</string>
+    <string name="voter_image">Voter Image</string>
+    <string name="candidate_web_link">Candidate Web Link</string>
+    <string name="candidate_facebook_link">Candidate Facebook Link</string>
+    <string name="candidate_twitter_link">Candidate Twitter Link</string>
+    <string name="address">Address</string>
+    <string name="address_city">Address City</string>
 
     <!-- TODO: Add necessary string values -->
 

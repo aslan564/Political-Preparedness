@@ -1,17 +1,20 @@
 package com.example.android.politicalpreparedness.ui.fragment.voter
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import com.example.android.politicalpreparedness.R
 import com.example.android.politicalpreparedness.databinding.FragmentVoterInfoBinding
 import com.example.android.politicalpreparedness.ui.activity.MainActivity
+import com.example.android.politicalpreparedness.util.openUrlLocation
 import com.example.android.politicalpreparedness.viewModel.VoterInfoViewModel
+
+private const val TAG = "VoterInfoFragment"
 
 class VoterInfoFragment : Fragment() {
 
@@ -24,25 +27,48 @@ class VoterInfoFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = binding.root
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        //TODO: Add ViewModel values and create ViewModel
-        binding.lifecycleOwner = this@VoterInfoFragment
+    ): View {
+        val view = binding.root
         viewModelFactory = VoterInfoViewModelFactory(requireActivity().application)
-
-
-
         viewModel = ViewModelProvider(
             this@VoterInfoFragment,
             viewModelFactory
         ).get(VoterInfoViewModel::class.java)
 
+
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+        binding.lifecycleOwner = this@VoterInfoFragment
+
         binding.viewModelVoter = viewModel
+
+
+        viewModel.electionVoterResponse.observe(viewLifecycleOwner, { response ->
+            response?.let {
+                response.state?.let {list->
+                    for (item in list) {
+                        binding.stateLocations.setOnClickListener {
+                            if (item.electionAdministrationBody?.electionInfoUrl!=null) {
+                                Log.d(TAG, "onViewCreated: ${item.electionAdministrationBody.electionInfoUrl}")
+                                item.electionAdministrationBody.absenteeVotingInfoUrl?.openUrlLocation(requireActivity())
+                            }else{
+                                makeToast("Election Not Active")
+                            }
+
+                        }
+                    }
+                }?:makeToast("The time to give this Election is past ")
+            }
+        })
+
         viewModel.electionInfoFromDB.observe(viewLifecycleOwner, {
             it?.let {
-                if (binding.buttonFollowElection.text == ButtonState.FOLLOW) {
+                if (binding.buttonFollowElection.text == getString(R.string.follow_election)) {
                     binding.buttonFollowElection.setText(R.string.unfollow_election)
                 } else {
                     binding.buttonFollowElection.setText(R.string.follow_election)
@@ -50,9 +76,10 @@ class VoterInfoFragment : Fragment() {
             }
         })
 
+    }
 
-        //TODO: Link elections to voter info
-
+    private fun makeToast(s: String) {
+        Toast.makeText(requireContext(), s, Toast.LENGTH_SHORT).show()
     }
 
     override fun onStart() {
@@ -60,15 +87,15 @@ class VoterInfoFragment : Fragment() {
         arguments?.let {
             val election = VoterInfoFragmentArgs.fromBundle(it).argElection
             (activity as MainActivity).supportActionBar?.title = election.name
+
+
             binding.buttonFollowElection.setOnClickListener {
-                if (binding.buttonFollowElection.text == ButtonState.FOLLOW) {
+                if (binding.buttonFollowElection.text == getString(R.string.follow_election)) {
                     viewModel.followElection(election)
                     binding.buttonFollowElection.setText(R.string.unfollow_election)
-                    Toast.makeText(requireContext(), "Follow", Toast.LENGTH_SHORT).show()
                 } else {
                     viewModel.unfollowElection(election)
                     binding.buttonFollowElection.setText(R.string.follow_election)
-                    Toast.makeText(requireContext(), "Unfollow", Toast.LENGTH_SHORT).show()
                 }
 
             }
@@ -79,9 +106,4 @@ class VoterInfoFragment : Fragment() {
     }
     //TODO: Create method to load URL intents
 
-}
-
-object ButtonState {
-    const val FOLLOW = "Follow Election"
-    const val UNFOLLOW = "Unfollow Election"
 }

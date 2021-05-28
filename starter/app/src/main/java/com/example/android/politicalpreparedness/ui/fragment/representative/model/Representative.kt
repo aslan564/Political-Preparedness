@@ -4,16 +4,31 @@ import androidx.recyclerview.widget.DiffUtil
 import com.example.android.politicalpreparedness.network.models.representative.Office
 import com.example.android.politicalpreparedness.network.models.representative.Official
 
-data class Representative (
-    val official: Official,
-    val office: Office
-)
-class RepresentativeDiffCallback : DiffUtil.ItemCallback<Representative>() {
-        override fun areItemsTheSame(oldItem: Representative, newItem: Representative): Boolean {
-                return oldItem === newItem
+class Representative(var official: Official, var office: Office) {
+
+    companion object {
+        fun addOfficialList(response: List<Official>): ArrayList<Official> {
+            val newList = ArrayList<Official>()
+            newList.addAll(response)
+            return newList
         }
 
-        override fun areContentsTheSame(oldItem: Representative, newItem: Representative): Boolean {
-                return oldItem.office == newItem.office
+
+        fun addOOfficeList(response: List<Office>): ArrayList<Office> {
+            val newList = ArrayList<Office>()
+            newList.addAll(response)
+            return newList
         }
+    }
+
+}
+
+class RepresentativeDiffCallback : DiffUtil.ItemCallback<Representative>() {
+    override fun areItemsTheSame(oldItem: Representative, newItem: Representative): Boolean {
+        return oldItem === newItem
+    }
+
+    override fun areContentsTheSame(oldItem: Representative, newItem: Representative): Boolean {
+        return oldItem.office == newItem.office
+    }
 }

@@ -12,12 +12,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.concurrent.TimeUnit
-/*
-private const val BASE_URL = "https://api.nasa.gov/"
-private const val API_KEY = "5qQvW5DyB6tRlE7qyWLftAFMGs1gCag701mTUs8H"
-*/
-
-
 
 private const val BASE_URL = "https://www.googleapis.com/civicinfo/v2/"
 private const val API_KEY = "AIzaSyBq52QAE9EE2J8SH8j43hFYfz1pUq21JKU"
@@ -47,7 +41,7 @@ object RetrofitClient {
             .build()
     }
 
-    /* private fun getClientTwo(): Retrofit {
+   private fun getClientTwo(): Retrofit {
         when (retrofit) {
             null -> {
 
@@ -63,7 +57,7 @@ object RetrofitClient {
         }
         Log.d("retrofitSVC", "getClient: ${retrofit?.baseUrl()?.queryParameterNames}")
         return retrofit as Retrofit
-    }*/
+    }
 
     private fun getClient(): Retrofit {
         when (retrofit) {

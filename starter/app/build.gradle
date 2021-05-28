@@ -82,11 +82,16 @@ dependencies {
 
     implementation "androidx.recyclerview:recyclerview:1.2.0"
 
-    implementation 'com.squareup.picasso:picasso:2.71828'
+
+     // Glide
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 
     // Glide
     //TODO: Add Glide Implementation
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    kapt 'com.github.bumptech.glide:compiler:4.12.0'
 
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
     //Room
     implementation 'androidx.room:room-ktx:2.3.0'

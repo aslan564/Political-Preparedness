@@ -56,7 +56,7 @@ class ElectionsFragment : Fragment() {
             this@ElectionsFragment,
             viewModelFactory
         ).get(ElectionsViewModel::class.java)
-        (activity as MainActivity).supportActionBar?.title= "Political Preparedness"
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.app_name)
 
         return view
     }

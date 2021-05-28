@@ -8,6 +8,7 @@ import com.example.android.politicalpreparedness.database.ElectionDatabase
 import com.example.android.politicalpreparedness.network.LocalStatus
 import com.example.android.politicalpreparedness.network.jsonadapter.ElectionAdapter
 import com.example.android.politicalpreparedness.network.models.entity.Election
+import com.example.android.politicalpreparedness.network.models.voter.VoterResponse
 import com.example.android.politicalpreparedness.repository.ElectionRepository
 import com.example.android.politicalpreparedness.util.convertToElections
 import com.example.android.politicalpreparedness.util.localDateToEpoch
@@ -22,9 +23,14 @@ class VoterInfoViewModel(application: Application) : AndroidViewModel(applicatio
     private var dataSource = ElectionRepository(database)
 
 
-    private var _electionInfo = MutableLiveData<Election>()
-    val electionInfo: LiveData<Election>
-        get() = _electionInfo
+    private var _electionVoterResponse = MutableLiveData<VoterResponse>()
+    val electionVoterResponse: LiveData<VoterResponse>
+        get() = _electionVoterResponse
+
+    private var _electionInfoFromApi = MutableLiveData<Election>()
+    val electionInfoFromApi: LiveData<Election>
+        get() = _electionInfoFromApi
+
     private var _electionInfoFromDB = MutableLiveData<Election>()
     val electionInfoFromDB: LiveData<Election>
         get() = _electionInfoFromDB
@@ -47,14 +53,20 @@ class VoterInfoViewModel(application: Application) : AndroidViewModel(applicatio
     fun getVoterInfo(election: Election) = viewModelScope.launch {
         val data = dataSource.fetchVoterInfo(election.name, election.id.toLong())
         if (data.status == LocalStatus.SUCCESS) {
-           val convertData= withContext(Dispatchers.Default) {
+
+            val convertData = withContext(Dispatchers.Default) {
                 val division =
                     ElectionAdapter.divisionFromJson(data.data!!.election!!.ocdDivisionId)
                 val date =
                     Converters.fromTimestamp(data.data.election!!.electionDay.localDateToEpoch())
-               return@withContext convertToElections(data.data.election, division, date)
+                return@withContext convertToElections(data.data.election, division, date)
             }
-            _electionInfo.value = convertData
+
+            _electionInfoFromApi.value = convertData
+            data.data?.let {
+                _electionVoterResponse.postValue(it)
+            }
+
         } else {
             Log.d(TAG, "getVoterInfo: ${data.msg}")
         }

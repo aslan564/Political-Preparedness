@@ -15,13 +15,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val navController = navHostFragment.navController
 
+        this.supportActionBar!!.title=getString(R.string.app_name)
         navController.addOnDestinationChangedListener{controller, destination, arguments ->
             title = when (destination.id) {
                 R.id.voterInfoFragment -> "My title"
                 else -> "Default title"
             }
-
-
         }
     }
 }

@@ -12,7 +12,9 @@ import com.example.android.politicalpreparedness.network.LocalStatus
 import com.example.android.politicalpreparedness.network.jsonadapter.ElectionAdapter
 import com.example.android.politicalpreparedness.network.models.entity.Election
 import com.example.android.politicalpreparedness.repository.ElectionRepository
+import com.example.android.politicalpreparedness.sharedManager.SharedPreferenceManager
 import com.example.android.politicalpreparedness.util.convertToElections
+import com.example.android.politicalpreparedness.util.convertToLocation
 import com.example.android.politicalpreparedness.util.localDateToEpoch
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -29,9 +31,16 @@ class ElectionsViewModel(application: Application) : AndroidViewModel(applicatio
     val electionList: LiveData<List<Election>>
         get() = _electionList
 
+    fun refreshFirstData(login: Boolean) {
+        if (!login) {
+            SharedPreferenceManager.isLogin = true
+            Log.d(TAG, "refreshFirstData: $login")
+            viewModelScope.launch {
+            }
+        }
+    }
 
 
-    //TODO: Create live data val for upcoming elections
     fun getAllElections() = viewModelScope.launch {
         val data = repository.fetchElectionData()
         when (data.status) {
@@ -45,6 +54,8 @@ class ElectionsViewModel(application: Application) : AndroidViewModel(applicatio
                             mutableListElections.add(convertToElections(item, division, date))
                         }
                     }
+
+                    repository.saveLocationToDB(mutableListElections)
                     _electionList.value = mutableListElections
                 }
             }
@@ -60,7 +71,7 @@ class ElectionsViewModel(application: Application) : AndroidViewModel(applicatio
     }
 
     //TODO: Create val and functions to populate live data for upcoming elections from the API and saved elections from local database
-    val electionListFromApi=repository.getAllElectionsFromDB()
+    val electionListFromApi = repository.getAllElectionsFromDB()
 
     //TODO: Create functions to navigate to saved or upcoming election voter info
     fun deleteElection(id: Int) = viewModelScope.launch {

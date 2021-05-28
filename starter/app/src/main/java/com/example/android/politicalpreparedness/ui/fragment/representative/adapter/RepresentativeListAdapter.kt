@@ -5,9 +5,10 @@ import androidx.recyclerview.widget.ListAdapter
 import com.example.android.politicalpreparedness.ui.fragment.representative.model.Representative
 import com.example.android.politicalpreparedness.ui.fragment.representative.model.RepresentativeDiffCallback
 
-class RepresentativeListAdapter: ListAdapter<Representative, RepresentativeViewHolder>(
-    RepresentativeDiffCallback()
-){
+class RepresentativeListAdapter(private val onClickRepresentative: (String) -> Unit) :
+    ListAdapter<Representative, RepresentativeViewHolder>(
+        RepresentativeDiffCallback()
+    ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepresentativeViewHolder {
         return RepresentativeViewHolder.from(parent)
@@ -15,7 +16,7 @@ class RepresentativeListAdapter: ListAdapter<Representative, RepresentativeViewH
 
     override fun onBindViewHolder(holder: RepresentativeViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item)
+        holder.bind(item, onClickRepresentative)
     }
 }
 
